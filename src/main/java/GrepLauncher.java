@@ -1,4 +1,3 @@
-
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.CmdLineException;
@@ -9,19 +8,19 @@ import java.io.IOException;
 public class GrepLauncher {
 
     @Option(name = "-i", metaVar = "Ignore Case", usage = "Ignore case")
-    private boolean _ignoreCase = true;
+    private boolean _ignoreCase;
 
     @Option(name = "-v", metaVar = "Invert Filter", usage = "Reverse filter")
-    private boolean _invertFilter = true;
+    private boolean _invertFilter;
 
     @Argument(metaVar = "-r", usage = "Regex filter")
-    private boolean _regex = true;
+    private boolean _regex;
 
     @Argument(required = true, metaVar = "word", index = 1, usage = "Word / Regex for searching")
-    private String word = "[\"+у+\"]";
+    private String word;
 
     @Argument(required = true, metaVar = "Input File Name", index = 2, usage = "Input file name")
-    private String inputFileName = "src\\files\\test_1.txt";
+    private String inputFileName;
 
     public static void main(String[] args) {
         new GrepLauncher().launch(args);

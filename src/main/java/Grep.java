@@ -1,11 +1,9 @@
-
 import java.io.*;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("WeakerAccess")
 public class Grep {
 
     private final boolean _ignoreCase;
@@ -22,7 +20,6 @@ public class Grep {
 
     public String filter(String word, String inputFileName) throws IOException {
         ArrayList<String> result = new ArrayList<>();
-        System.out.println("*-------------------------------*");
         try {
             File file = new File(inputFileName);
             BufferedReader in = new BufferedReader(new FileReader(file));
@@ -31,11 +28,11 @@ public class Grep {
                 String line;
                 while ((line = in.readLine()) != null) {
                     if (_invertFilter) {
-                        if (!line.contains(word)) {
+                        if (!ignoreCase(line).contains(ignoreCase(word))) {
                             result.add(line);
                         }
                     } else {
-                        if (line.contains(word)) {
+                        if (ignoreCase(line).contains(ignoreCase(word))) {
                             result.add(line);
                         }
                     }
@@ -50,7 +47,6 @@ public class Grep {
                         if (!matcher.find()) {
                             result.add(line);
                         }
-
                     } else {
                         if (matcher.find()) {
                             result.add(line);
@@ -65,7 +61,7 @@ public class Grep {
         for (String s : result) {
             System.out.println(s);
         }
-        return "*-------------------------------*";
+        return "";
     }
 
     public String ignoreCase(String text) throws IOException {

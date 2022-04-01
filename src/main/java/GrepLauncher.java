@@ -1,9 +1,12 @@
+package main.java;
+
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.Option;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GrepLauncher {
 
@@ -13,13 +16,13 @@ public class GrepLauncher {
     @Option(name = "-v", metaVar = "Invert Filter", usage = "Reverse filter")
     private boolean _invertFilter;
 
-    @Argument(metaVar = "-r", usage = "Regex filter")
+    @Option(name = "-r", metaVar = "-r", usage = "Regex filter")
     private boolean _regex;
 
-    @Argument(required = true, metaVar = "word", index = 1, usage = "Word / Regex for searching")
+    @Argument(required = true, metaVar = "word", usage = "Word / Regex for searching")
     private String word;
 
-    @Argument(required = true, metaVar = "Input File Name", index = 2, usage = "Input file name")
+    @Argument(required = true, metaVar = "Input File Name", index = 1, usage = "Input file name")
     private String inputFileName;
 
     public static void main(String[] args) {
@@ -39,8 +42,10 @@ public class GrepLauncher {
 
         Grep grep = new Grep(_ignoreCase, _regex, _invertFilter);
         try {
-            String result = grep.filter(word, inputFileName);
-            System.out.println(result);
+            ArrayList<String> result = grep.filter(word, inputFileName);
+            for (Object output : result) {
+                System.out.println(output);
+            }
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

@@ -1,5 +1,6 @@
-import java.io.*;
+package main.java;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ public class Grep {
 
     }
 
-    public String filter(String word, String inputFileName) throws IOException {
+    public ArrayList<String> filter(String word, String inputFileName) throws IOException {
         ArrayList<String> result = new ArrayList<>();
         try {
             File file = new File(inputFileName);
@@ -29,11 +30,11 @@ public class Grep {
                 while ((line = in.readLine()) != null) {
                     if (_invertFilter) {
                         if (!ignoreCase(line).contains(ignoreCase(word))) {
-                            result.add(line);
+                            System.out.println(line);
                         }
                     } else {
                         if (ignoreCase(line).contains(ignoreCase(word))) {
-                            result.add(line);
+                            System.out.println(line);
                         }
                     }
                 }
@@ -45,11 +46,11 @@ public class Grep {
                     Matcher matcher = pattern.matcher(ignoreCase(line));
                     if (_invertFilter) {
                         if (!matcher.find()) {
-                            result.add(line);
+                            System.out.println(line);
                         }
                     } else {
                         if (matcher.find()) {
-                            result.add(line);
+                            System.out.println(line);
                         }
                     }
                 }
@@ -58,10 +59,7 @@ public class Grep {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        for (String s : result) {
-            System.out.println(s);
-        }
-        return "";
+        return result;
     }
 
     public String ignoreCase(String text) throws IOException {

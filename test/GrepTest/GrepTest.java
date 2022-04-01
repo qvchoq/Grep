@@ -1,9 +1,10 @@
+package GrepTest;
+
+import main.java.Grep;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -26,7 +27,7 @@ public class GrepTest {
     @Test
     public void test1() throws IOException {
         Grep grep = new Grep(true, false, false);
-        grep.filter("собака", "src/files/test_1.txt");
+        grep.filter("собака", "files/test_1.txt");
         assertFileContent("""
                 собака съела\r
                 собака рыла ямУ\r
@@ -37,7 +38,7 @@ public class GrepTest {
     @Test
     public void test2() throws IOException {
         Grep grep = new Grep(true, true, false);
-        grep.filter("[+у+]", "src/files/test_1.txt");
+        grep.filter("[+у+]", "files/test_1.txt");
         assertFileContent("""
                 собеку\r
                 собака рыла ямУ\r
@@ -48,7 +49,7 @@ public class GrepTest {
     @Test
     public void test3() throws IOException {
         Grep grep = new Grep(true, true, true);
-        grep.filter("[+у+]", "src/files/test_1.txt");
+        grep.filter("[+у+]", "files/test_1.txt");
         assertFileContent("""
                 собака съела\r
                 кошка нашла\r
@@ -61,7 +62,7 @@ public class GrepTest {
     @Test
     public void test4() throws IOException {
         Grep grep = new Grep(true, false, false);
-        grep.filter("человек", "src/files/test_2.txt");
+        grep.filter("человек", "files/test_2.txt");
         assertFileContent("""
                 Скайлер смог собрать всего около 1000 человек, которых он и направил на север под командованием генерала Ричарда Монтгомери.\r
                 """);
@@ -70,7 +71,7 @@ public class GrepTest {
     @Test
     public void test5() throws IOException {
         Grep grep = new Grep(false, true, false);
-        grep.filter("\\d+", "src/files/test_2.txt");
+        grep.filter("\\d+", "files/test_2.txt");
         assertFileContent("""
                 27 июня 1775 года Филлип Скайлер, командующий американскими войсками в Нью-Йорке,\r
                 Скайлер смог собрать всего около 1000 человек, которых он и направил на север под командованием генерала Ричарда Монтгомери.\r
@@ -82,7 +83,7 @@ public class GrepTest {
     @Test
     public void test6() throws IOException {
         Grep grep = new Grep(false, true, false);
-        grep.filter("\\d+", "src/files/test_2.txt");
+        grep.filter("\\d+", "files/test_2.txt");
         assertFileContent("""
                 27 июня 1775 года Филлип Скайлер, командующий американскими войсками в Нью-Йорке,\r
                 Скайлер смог собрать всего около 1000 человек, которых он и направил на север под командованием генерала Ричарда Монтгомери.\r

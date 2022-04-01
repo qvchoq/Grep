@@ -34,7 +34,7 @@ public class GrepLauncher {
             parser.parseArgument(args);
         } catch (CmdLineException e) {
             System.err.println(e.getMessage());
-            System.err.println("java -jar grep.jar [-v] [-r] [-i] word inputName.txt");
+            System.err.println("java -jar grep.jar [-v] [-r] [-i] word inputFileName.txt");
             parser.printUsage(System.err);
         }
 

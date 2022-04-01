@@ -4,25 +4,23 @@ import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.Option;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class GrepLauncher {
 
-    @Option(name = "-i", metaVar = "Ignore Case", usage = "Ignore case")
+    @Option(name = "-i", usage = "Ignore case")
     private boolean _ignoreCase;
 
-    @Option(name = "-v", metaVar = "Invert Filter", usage = "Reverse filter")
+    @Option(name = "-v", usage = "Reverse filter")
     private boolean _invertFilter;
 
-    @Option(name = "-r", metaVar = "-r", usage = "Regex filter")
+    @Option(name = "-r", usage = "Regex filter")
     private boolean _regex;
 
-    @Argument(required = true, metaVar = "word", usage = "Word / Regex for searching")
+    @Argument(required = true, metaVar = "word", usage = "Word / Regex with regex filter")
     private String word;
 
-    @Argument(required = true, metaVar = "Input File Name", index = 1, usage = "Input file name")
+    @Argument(required = true, metaVar = "InputFileName", index = 1, usage = "path to Inputfilename.txt")
     private String inputFileName;
 
     public static void main(String[] args) {
@@ -42,10 +40,7 @@ public class GrepLauncher {
 
         Grep grep = new Grep(_ignoreCase, _regex, _invertFilter);
         try {
-            ArrayList<String> result = grep.filter(word, inputFileName);
-            for (Object output : result) {
-                System.out.println(output);
-            }
+           grep.filter(word, inputFileName);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

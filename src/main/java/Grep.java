@@ -1,7 +1,6 @@
 package main.java;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,8 +18,8 @@ public class Grep {
 
     }
 
-    public ArrayList<String> filter(String word, String inputFileName) throws IOException {
-        ArrayList<String> result = new ArrayList<>();
+    public String filter(String word, String inputFileName) throws IOException {
+
         try {
             File file = new File(inputFileName);
             BufferedReader in = new BufferedReader(new FileReader(file));
@@ -59,7 +58,7 @@ public class Grep {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        return result;
+        return "";
     }
 
     public String ignoreCase(String text) throws IOException {

@@ -19,8 +19,8 @@ public class GrepTest {
         System.setOut(new PrintStream(output));
     }
 
-    void assertFileContent(String expectedContent) {
-        String content = output.toString();
+    void assertFileContent(String expectedContent){
+        String content = output.toString(/*"CP866"*/);
         assertEquals(expectedContent, content);
     }
 

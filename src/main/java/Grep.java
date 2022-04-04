@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class Grep {
 
     private final boolean _ignoreCase;
@@ -20,6 +21,7 @@ public class Grep {
 
     public void filter(String word, String inputFileName) throws IOException {
         try {
+            PrintStream ps = new PrintStream(System.out, true, "UTF-8" /*"CP866"*/);
             File file = new File(inputFileName);
             BufferedReader in = new BufferedReader(new FileReader(file));
 
@@ -28,11 +30,11 @@ public class Grep {
                 while ((line = in.readLine()) != null) {
                     if (_invertFilter) {
                         if (!ignoreCase(line).contains(ignoreCase(word))) {
-                            System.out.println(line);
+                            ps.println(line);
                         }
                     } else {
                         if (ignoreCase(line).contains(ignoreCase(word))) {
-                            System.out.println(line);
+                            ps.println(line);
                         }
                     }
                 }
@@ -44,11 +46,11 @@ public class Grep {
                     Matcher matcher = pattern.matcher(ignoreCase(line));
                     if (_invertFilter) {
                         if (!matcher.find()) {
-                            System.out.println(line);
+                            ps.println(line);
                         }
                     } else {
                         if (matcher.find()) {
-                            System.out.println(line);
+                            ps.println(line);
                         }
                     }
                 }

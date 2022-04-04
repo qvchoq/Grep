@@ -40,9 +40,17 @@ public class GrepLauncher {
 
         Grep grep = new Grep(_ignoreCase, _regex, _invertFilter);
         try {
+            //Смена кодировки в консоли на UTF-8
+            {
+                ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "chcp", "65001").inheritIO();
+                Process p = pb.start();
+                p.waitFor();
+            }
             grep.filter(word, inputFileName);
         } catch (IOException e) {
             System.err.println(e.getMessage());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }

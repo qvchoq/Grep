@@ -12,7 +12,7 @@ import java.io.PrintStream;
 
 public class GrepTest {
 
-    private ByteArrayOutputStream output = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
     @Before
     public void setUpStreams() {

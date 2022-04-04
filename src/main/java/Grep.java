@@ -18,8 +18,7 @@ public class Grep {
 
     }
 
-    public String filter(String word, String inputFileName) throws IOException {
-
+    public void filter(String word, String inputFileName) throws IOException {
         try {
             File file = new File(inputFileName);
             BufferedReader in = new BufferedReader(new FileReader(file));
@@ -58,7 +57,6 @@ public class Grep {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        return "";
     }
 
     public String ignoreCase(String text) throws IOException {

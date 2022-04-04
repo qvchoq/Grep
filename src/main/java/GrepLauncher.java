@@ -40,7 +40,7 @@ public class GrepLauncher {
 
         Grep grep = new Grep(_ignoreCase, _regex, _invertFilter);
         try {
-           grep.filter(word, inputFileName);
+            grep.filter(word, inputFileName);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

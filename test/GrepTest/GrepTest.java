@@ -29,18 +29,18 @@ public class GrepTest {
     public void test1() throws IOException {
         Grep grep = new Grep(true, false, false);
         grep.filter("собака", "files/test_1.txt");
-        assertFileContent("");
+        assertFileContent("""
+                собака съела\r
+                собака рыла ямУ\r
+                СОБАКА\r
+                """);
     }
 
     @Test
     public void test2() throws IOException {
         Grep grep = new Grep(true, true, false);
         grep.filter("[+у+]", "files/test_1.txt");
-        assertFileContent("""
-                собеку\r
-                собака рыла ямУ\r
-                выгуляли собаку\r
-                """);
+        assertFileContent("");
     }
 
     @Test

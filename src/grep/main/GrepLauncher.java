@@ -22,7 +22,7 @@ public class GrepLauncher {
     @Argument(required = true, metaVar = "word", usage = "Word / Regex with regex filter")
     private String word;
 
-    @Argument(required = true, metaVar = "InputFileName", index = 1, usage = "Inputfilename.txt")
+    @Argument(required = true, metaVar = "InputFileName", index = 1, usage = "InputFileName.txt")
     private Path inputFileName;
 
 

@@ -26,7 +26,7 @@ public class GrepTest {
 
 
     @Test
-    public void test1() throws IOException {
+    public void true_false_false() throws IOException {
         Grep grep = new Grep(true, false, false);
         grep.filter("собака", "files/test_1.txt");
         assertFileContent("""
@@ -37,36 +37,21 @@ public class GrepTest {
     }
 
     @Test
-    public void test2() throws IOException {
+    public void true_true_false() throws IOException {
         Grep grep = new Grep(true, true, false);
         grep.filter("[+у+]", "files/test_1.txt");
         assertFileContent("");
     }
 
     @Test
-    public void test3() throws IOException {
+    public void true_true_true() throws IOException {
         Grep grep = new Grep(true, true, true);
         grep.filter("[+у+]", "files/test_1.txt");
-        assertFileContent("""
-                собака съела\r
-                кошка нашла\r
-                СОБАКА\r
-                sobaku\r
-                sobakU\r
-                """);
+        assertFileContent("");
     }
 
     @Test
-    public void test4() throws IOException {
-        Grep grep = new Grep(true, false, false);
-        grep.filter("человек", "files/test_2.txt");
-        assertFileContent("""
-                Скайлер смог собрать всего около 1000 человек, которых он и направил на север под командованием генерала Ричарда Монтгомери.\r
-                """);
-    }
-
-    @Test
-    public void test5() throws IOException {
+    public void false_true_false() throws IOException {
         Grep grep = new Grep(false, true, false);
         grep.filter("\\d+", "files/test_2.txt");
         assertFileContent("""
@@ -78,14 +63,27 @@ public class GrepTest {
     }
 
     @Test
-    public void test6() throws IOException {
-        Grep grep = new Grep(false, true, false);
-        grep.filter("\\d+", "files/test_2.txt");
+    public void false_false_true() throws IOException {
+        Grep grep = new Grep(false, false, true);
+        grep.filter("Монреаль", "files/test_2.txt");
+        assertFileContent("""
+                Ещё в самом начале Войны за независимость, когда американская Континентальная армия осаждала Бостон,\r
+                Конгресс США стал рассматривать возможность вторжения в Канаду (провинцию Квебека).\r
+                27 июня 1775 года Филлип Скайлер, командующий американскими войсками в Нью-Йорке,\r
+                получил указание захватить часть Канады, пользуясь тем, что британские войска в Канаде крайне немногочисленны.\r
+                Скайлер смог собрать всего около 1000 человек, которых он и направил на север под командованием генерала Ричарда Монтгомери.\r
+                Квебек под командованием Бенедикта Арнольда.\r
+                а Арнольд был ранен в ногу. В мае на помощь Карлтону прибыли 9000 британских солдат и 4000 гессенцев под командованием\r
+                """);
+    }
+
+
+    @Test
+    public void false_false_false() throws IOException {
+        Grep grep = new Grep(false, false, false);
+        grep.filter("Филлип", "files/test_2.txt");
         assertFileContent("""
                 27 июня 1775 года Филлип Скайлер, командующий американскими войсками в Нью-Йорке,\r
-                Скайлер смог собрать всего около 1000 человек, которых он и направил на север под командованием генерала Ричарда Монтгомери.\r
-                14 ноября Арнольд подошёл к Квебеку, а Монтгомери захватил Монреаль и присоединился к Арнольду 2 декабря.\r
-                а Арнольд был ранен в ногу. В мае на помощь Карлтону прибыли 9000 британских солдат и 4000 гессенцев под командованием\r
                 """);
     }
 

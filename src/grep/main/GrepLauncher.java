@@ -1,27 +1,30 @@
-package main.java;
+package grep.main;
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.Option;
+
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class GrepLauncher {
 
-    @Option(name = "-i", usage = "Ignore case")
-    private boolean _ignoreCase;
+    @Option(name = "-i", forbids = {"-r"}, usage = "Ignore case")
+    private boolean ignoreCase;
 
     @Option(name = "-v", usage = "Reverse filter")
-    private boolean _invertFilter;
+    private boolean invertFilter;
 
-    @Option(name = "-r", usage = "Regex filter")
-    private boolean _regex;
+    @Option(name = "-r", forbids = {"-i"}, usage = "Regex filter")
+    private boolean regex;
 
     @Argument(required = true, metaVar = "word", usage = "Word / Regex with regex filter")
     private String word;
 
-    @Argument(required = true, metaVar = "InputFileName", index = 1, usage = "path to Inputfilename.txt")
-    private String inputFileName;
+    @Argument(required = true, metaVar = "InputFileName", index = 1, usage = "Inputfilename.txt")
+    private Path inputFileName;
+
 
     public static void main(String[] args) {
         new GrepLauncher().launch(args);
@@ -36,23 +39,16 @@ public class GrepLauncher {
             System.err.println(e.getMessage());
             System.err.println("java -jar grep.jar [-v] [-r] [-i] word inputFileName.txt");
             parser.printUsage(System.err);
+            System.exit(0);
         }
 
-        Grep grep = new Grep(_ignoreCase, _regex, _invertFilter);
+        Grep grep = new Grep(ignoreCase, regex, invertFilter);
         try {
-            //Смена кодировки в консоли на UTF-8
-            {
-                ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "chcp", "65001").inheritIO();
-                Process p = pb.start();
-                p.waitFor();
-            }
-            grep.filter(word, inputFileName);
+            grep.filter(word, String.valueOf(inputFileName));
         } catch (IOException e) {
             System.err.println(e.getMessage());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.exit(0);
         }
-
     }
 
 

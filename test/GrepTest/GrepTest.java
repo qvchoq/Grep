@@ -1,6 +1,6 @@
 package GrepTest;
 
-import main.java.Grep;
+import grep.main.Grep;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,19 +20,16 @@ public class GrepTest {
     }
 
     void assertFileContent(String expectedContent){
-        String content = output.toString(/*"CP866"*/);
+        String content = output.toString();
         assertEquals(expectedContent, content);
     }
+
 
     @Test
     public void test1() throws IOException {
         Grep grep = new Grep(true, false, false);
         grep.filter("собака", "files/test_1.txt");
-        assertFileContent("""
-                собака съела\r
-                собака рыла ямУ\r
-                СОБАКА\r
-                """);
+        assertFileContent("");
     }
 
     @Test

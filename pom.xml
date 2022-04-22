@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.grep</groupId>
-    <artifactId>Grep</artifactId>
-    <version>1.0</version>
+    <artifactId>grep</artifactId>
+    <version>1</version>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
@@ -50,7 +50,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>main.java.GrepLauncher</mainClass>
+                            <mainClass>grep.main.GrepLauncher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -69,7 +69,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>main.java.GrepLauncher</mainClass>
+                            <mainClass>grep.main.GrepLauncher</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

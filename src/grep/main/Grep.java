@@ -1,4 +1,4 @@
-package main.java;
+package grep.main;
 
 import java.io.*;
 import java.util.regex.Matcher;
@@ -7,50 +7,49 @@ import java.util.regex.Pattern;
 
 public class Grep {
 
-    private final boolean _ignoreCase;
-    private final boolean _regex;
-    private final boolean _invertFilter;
+    private final boolean ignoreCase;
+    private final boolean regex;
+    private final boolean invertFilter;
 
-    public Grep(boolean _ignoreCase, boolean _regex, boolean _invertFilter) {
+    public Grep(boolean ignoreCase, boolean regex, boolean invertFilter) {
 
-        this._ignoreCase = _ignoreCase;
-        this._regex = _regex;
-        this._invertFilter = _invertFilter;
+        this.ignoreCase = ignoreCase;
+        this.regex = regex;
+        this.invertFilter = invertFilter;
 
     }
 
     public void filter(String word, String inputFileName) throws IOException {
         try {
-            PrintStream ps = new PrintStream(System.out, true, "UTF-8" /*"CP866"*/);
             File file = new File(inputFileName);
             BufferedReader in = new BufferedReader(new FileReader(file));
 
-            if (!_regex) {
+            if (!regex) {
                 String line;
                 while ((line = in.readLine()) != null) {
-                    if (_invertFilter) {
+                    if (invertFilter) {
                         if (!ignoreCase(line).contains(ignoreCase(word))) {
-                            ps.println(line);
+                            System.out.println(line);
                         }
                     } else {
                         if (ignoreCase(line).contains(ignoreCase(word))) {
-                            ps.println(line);
+                            System.out.println(line);
                         }
                     }
                 }
             }
-            if (_regex) {
+            if (regex) {
                 Pattern pattern = Pattern.compile(ignoreCase(word));
                 String line;
                 while ((line = in.readLine()) != null) {
                     Matcher matcher = pattern.matcher(ignoreCase(line));
-                    if (_invertFilter) {
+                    if (invertFilter) {
                         if (!matcher.find()) {
-                            ps.println(line);
+                            System.out.println(line);;
                         }
                     } else {
                         if (matcher.find()) {
-                            ps.println(line);
+                            System.out.println(line);
                         }
                     }
                 }
@@ -62,12 +61,11 @@ public class Grep {
     }
 
     public String ignoreCase(String text) throws IOException {
-        if (_ignoreCase) {
+        if (ignoreCase) {
             return text.toLowerCase();
         } else {
             return text;
         }
-
     }
 
 }

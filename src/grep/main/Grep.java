@@ -1,10 +1,11 @@
 package grep.main;
 
+import java.io.IOException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 public class Grep {
 

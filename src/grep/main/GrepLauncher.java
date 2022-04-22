@@ -22,7 +22,7 @@ public class GrepLauncher {
     @Argument(required = true, metaVar = "word")
     private String word;
 
-    @Argument(required = true, metaVar = "InputFileName")
+    @Argument(required = true, index = 1, metaVar = "InputFileName")
     private Path inputFileName;
 
 
@@ -50,6 +50,4 @@ public class GrepLauncher {
             System.exit(0);
         }
     }
-
-
 }

@@ -30,13 +30,13 @@ public class GrepTest {
     @Test(expected = NullPointerException.class)
     public void testEmptyWord() throws IOException {
         Grep grep = new Grep(false, false, false);
-        grep.filter(null, "./test/resources/test_1.txt");
+        grep.filter(null, "./resources/test_1.txt");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testNotExistingFile() throws IOException {
         Grep grep = new Grep(false, false, false);
-        grep.filter("", "./test/resources/test_3.txt");
+        grep.filter("", "./resources/test_3.txt");
         assertConsoleContent("");
     }
 
@@ -50,42 +50,45 @@ public class GrepTest {
     @Test(expected = IllegalArgumentException.class)
     public void testDirectory() throws IOException {
         Grep grep = new Grep(false, false, false);
-        grep.filter("word", "./test/resources/");
+        grep.filter("word", "./resources/");
         assertConsoleContent("");
     }
 
     @Test
     public void testEmptyFile() throws IOException {
         Grep grep = new Grep(false, false, false);
-        grep.filter("word", "./test/resources/test_empty.txt");
+        grep.filter("word", "./resources/test_empty.txt");
         assertConsoleContent("");
     }
 
     @Test
     public void testIgnoreCase() throws IOException {
         Grep grep = new Grep(true, false, false);
-        grep.filter("собака", "./test/resources/test_1.txt");
+        grep.filter("собака", "./resources/test_1.txt");
         assertConsoleContent("собака съела" + System.lineSeparator() +
                 "собака рыла ямУ" + System.lineSeparator() +
                 "СОБАКА" + System.lineSeparator());
     }
 
+    //Вопрос с forbids
+    /*
     @Test(expected = IllegalArgumentException.class)
     public void testIgnoreCaseAndRegex() throws IOException {
         Grep grep = new Grep(true, true, false);
-        grep.filter("[+у+]", "./test/resources/test_1.txt");
+        grep.filter("[+у+]", "./resources/test_1.txt");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAllOptions() throws IOException {
         Grep grep = new Grep(true, true, true);
-        grep.filter("[+у+]", "./test/resources/test_1.txt");
+        grep.filter("[+у+]", "./resources/test_1.txt");
     }
+     */
 
     @Test
     public void testRegex() throws IOException {
         Grep grep = new Grep(false, true, false);
-        grep.filter("\\d+", "./test/resources/test_2.txt");
+        grep.filter("\\d+", "./resources/test_2.txt");
         assertConsoleContent("27 июня 1775 года Филлип Скайлер, командующий американскими войсками в Нью-Йорке," + System.lineSeparator() +
                         "Скайлер смог собрать всего около 1000 человек, которых он и направил на север под командованием генерала Ричарда Монтгомери." + System.lineSeparator() +
                 "14 ноября Арнольд подошёл к Квебеку, а Монтгомери захватил Монреаль и присоединился к Арнольду 2 декабря." + System.lineSeparator() +
@@ -95,7 +98,7 @@ public class GrepTest {
     @Test
     public void testInvertFilter() throws IOException {
         Grep grep = new Grep(false, false, true);
-        grep.filter("Монреаль", "./test/resources/test_2.txt");
+        grep.filter("Монреаль", "./resources/test_2.txt");
         assertConsoleContent("Ещё в самом начале Войны за независимость, когда американская Континентальная армия осаждала Бостон," + System.lineSeparator() +
                 "Конгресс США стал рассматривать возможность вторжения в Канаду (провинцию Квебека)." + System.lineSeparator() +
                 "27 июня 1775 года Филлип Скайлер, командующий американскими войсками в Нью-Йорке," + System.lineSeparator() +
@@ -109,7 +112,7 @@ public class GrepTest {
     @Test
     public void testNoOptions() throws IOException {
         Grep grep = new Grep(false, false, false);
-        grep.filter("Филлип", "./test/resources/test_2.txt");
+        grep.filter("Филлип", "./resources/test_2.txt");
         assertConsoleContent("27 июня 1775 года Филлип Скайлер, командующий американскими войсками в Нью-Йорке," + System.lineSeparator());
     }
 

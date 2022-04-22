@@ -27,6 +27,7 @@ public class Grep {
 
             Pattern pattern = Pattern.compile(word);
             String line;
+
             while ((line = in.readLine()) != null) {
                 if (regex) {
                     Matcher matcher = pattern.matcher(line);
@@ -55,7 +56,7 @@ public class Grep {
             in.close();
             result.forEach(System.out::println);
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

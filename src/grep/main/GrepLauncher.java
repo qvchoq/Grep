@@ -10,7 +10,7 @@ import java.nio.file.Path;
 
 public class GrepLauncher {
 
-    @Option(name = "-i", forbids = {"-r"}, usage = "Ignore case")
+    @Option(name = "-i", usage = "Ignore case")
     private boolean ignoreCase;
 
     @Option(name = "-v", usage = "Reverse filter")
@@ -19,10 +19,10 @@ public class GrepLauncher {
     @Option(name = "-r", forbids = {"-i"}, usage = "Regex filter")
     private boolean regex;
 
-    @Argument(required = true, metaVar = "word", usage = "Word / Regex with regex filter")
+    @Argument(required = true, metaVar = "word")
     private String word;
 
-    @Argument(required = true, metaVar = "InputFileName", index = 1, usage = "InputFileName.txt")
+    @Argument(required = true, metaVar = "InputFileName")
     private Path inputFileName;
 
 

@@ -39,7 +39,7 @@ public class GrepLauncher {
             System.err.println(e.getMessage());
             System.err.println("java -jar grep.jar [-v] [-r] [-i] word inputFileName.txt");
             parser.printUsage(System.err);
-            System.exit(0);
+            System.exit(-1);
         }
 
         Grep grep = new Grep(ignoreCase, regex, invertFilter);
@@ -47,7 +47,7 @@ public class GrepLauncher {
             grep.filter(word, String.valueOf(inputFileName));
         } catch (IOException e) {
             System.err.println(e.getMessage());
-            System.exit(0);
+            System.exit(-1);
         }
     }
 }

@@ -21,7 +21,7 @@ public class Grep {
 
     public void filter(String word, String inputFileName) throws IOException {
         try {
-            ArrayList<String> result = new ArrayList<String>();
+            ArrayList<String> result = new ArrayList<>();
 
             File file = new File(inputFileName);
             BufferedReader in = new BufferedReader(new FileReader(file));

@@ -70,21 +70,6 @@ public class GrepTest {
                 "СОБАКА" + System.lineSeparator());
     }
 
-    //Вопрос с forbids
-    /*
-    @Test(expected = IllegalArgumentException.class)
-    public void testIgnoreCaseAndRegex() throws IOException {
-        Grep grep = new Grep(true, true, false);
-        grep.filter("[+у+]", "./resources/test_1.txt");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testAllOptions() throws IOException {
-        Grep grep = new Grep(true, true, true);
-        grep.filter("[+у+]", "./resources/test_1.txt");
-    }
-     */
-
     @Test
     public void testRegex() throws IOException {
         Grep grep = new Grep(false, true, false);
